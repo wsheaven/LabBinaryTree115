@@ -221,8 +221,17 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
    {
       pDest = new BNode<T>(pSrc->data);
    }
+   else
+   {
+      pDest->data = pSrc->data;
+   }
 
-   pDest->data = pSrc->data;
    assign(pDest->pRight, pSrc->pRight);
+   if (pDest->pRight != nullptr) {
+      pDest->pRight->pParent = pDest;
+   }
    assign(pDest->pLeft, pSrc->pLeft);
+   if (pDest->pLeft != nullptr) {
+      pDest->pLeft->pParent = pDest;
+   }
 }
